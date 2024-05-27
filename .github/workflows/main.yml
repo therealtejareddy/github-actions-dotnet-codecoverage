@@ -1,0 +1,51 @@
+name: Code coverage
+
+on: [push, pull_request]
+
+env:
+  DOTNET_VERSION: '8.0.100'
+
+jobs:
+  publish-nuget:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET environment
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: build
+        run : dotnet build --no-restore /p:ContinuousIntegrationBuild=true
+
+      - name: Test with Code coverage
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=coverage/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/**/coverage.cobertura.xml
+          flags: unittests
+          name: codecov-umbrella
+
+      - name: Generate coverage summary report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: 'coverage/*/coverage.cobertura.xml'
+          badge: true
+          format: 'markdown'
+          output: 'both'
+  
+      - name: Add coverage report to PR comment
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          recreate: true
+          path: code-coverage-results.md
+  
+      - name: Add coverage summary to job summary
+        run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
