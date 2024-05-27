@@ -28,17 +28,22 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          files: /coverage/**/coverage.cobertura.xml
+          files: coverage/**/coverage.cobertura.xml
           flags: unittests
           name: codecov-umbrella
 
       - name: Generate coverage summary report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: /coverage/**/coverage.cobertura.xml
+          filename: coverage/**/coverage.cobertura.xml
           badge: true
+          fail_below_min: true
           format: markdown
+          hide_branch_rate: false
+          hide_complexity: true
+          indicators: true
           output: both
+          thresholds: '60 80'
   
       - name: Add coverage report to PR comment
         if: github.event_name == 'pull_request'
