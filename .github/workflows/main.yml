@@ -23,22 +23,22 @@ jobs:
         run : dotnet build --no-restore /p:ContinuousIntegrationBuild=true
 
       - name: Test with Code coverage
-        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./coverage/**/coverage.cobertura.xml
+          files: /coverage/**/coverage.cobertura.xml
           flags: unittests
           name: codecov-umbrella
 
       - name: Generate coverage summary report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: 'coverage/*/coverage.cobertura.xml'
+          filename: /coverage/**/coverage.cobertura.xml
           badge: true
-          format: 'markdown'
-          output: 'both'
+          format: markdown
+          output: both
   
       - name: Add coverage report to PR comment
         if: github.event_name == 'pull_request'
