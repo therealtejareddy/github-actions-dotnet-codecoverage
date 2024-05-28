@@ -23,14 +23,14 @@ jobs:
         run : dotnet build --no-restore /p:ContinuousIntegrationBuild=true
 
       - name: Test with Code coverage
-        run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage --logger "trx;LogFilePrefix=test-results.trx"
+        run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage --logger "trx;LogFileName=test-results.trx"
       
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: always()    # Explicitly run this step even if previous step failed
         with:
           name: .NET Tests
-          path: "**/*.trx"
+          path: "**/test-results.trx"
           reporter: dotnet-trx
           fail-on-error: true
           
