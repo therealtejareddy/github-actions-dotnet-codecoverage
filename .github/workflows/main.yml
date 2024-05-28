@@ -57,6 +57,14 @@ jobs:
           indicators: true
           output: both
           thresholds: '60 80'
+
+      - name: Create code coverage report
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator -reports:coverage/**/coverage.cobertura.xml -targetdir:CodeCoverage -reporttypes:'MarkdownSummaryGithub,Cobertura'
+
+      - name: Write to Job Summary
+        run: cat CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
   
       - name: Add coverage report to PR comment
         if: github.event_name == 'pull_request'
