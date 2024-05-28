@@ -24,7 +24,7 @@ jobs:
 
       - name: Test with Code coverage
         # run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=coverage -p:CoverletOutputFormat=opencover --verbosity normal --logger "trx;LogFileName=test-results.trx"
 
       # - name: Upload coverage to Codecov
       #   uses: codecov/codecov-action@v2
