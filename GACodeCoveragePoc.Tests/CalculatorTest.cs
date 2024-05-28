@@ -18,6 +18,22 @@ namespace GACodeCoveragePoc.Tests
         }
 
         [Fact]
+        public void Add_ThreeNumbersPass()
+        {
+            // Arrange
+            int a = 5;
+            int b = 5;
+            int c = 5;
+            int expected = 15;
+
+            // Act
+            int output = Calculator.Add(a, b, c);
+
+            // Assert
+            Assert.Equal(expected, output);
+        }
+
+        [Fact]
         public void Subtract_Pass()
         {
             // Arrange
