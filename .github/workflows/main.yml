@@ -25,7 +25,7 @@ jobs:
       - name: Test with Code coverage
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage --logger GithubActions
         # run: |
-        #   dotnet test --no-build -p:CollectCoverage=true -p:CoverletOutput=coverage -p:CoverletOutputFormat=opencover --verbosity normal --logger "trx;LogFileName=test-results.trx"
+        #   dotnet test --no-build -p:CollectCoverage=true -p:CoverletOutput=coverage -p:CoverletOutputFormat=opencover --verbosity normal --logger "trx;LogFilePrefix=test-results.trx"
         #   ls GACodeCoveragePoc.Tests
 
       # - name: Upload coverage to Codecov
@@ -40,7 +40,7 @@ jobs:
       #   if: always()    # Explicitly run this step even if previous step failed
       #   with:
       #     name: .NET Tests
-      #     path: "**/test-results.trx"
+      #     path: "**/*.trx"
       #     reporter: dotnet-trx
       #     fail-on-error: true
 
