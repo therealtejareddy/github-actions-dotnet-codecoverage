@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GACodeCoveragePoc\GACodeCoveragePoc.csproj" />
+    <ProjectReference Include="..\ProjectTwo\ProjectTwo.csproj" />
   </ItemGroup>
 
   <ItemGroup>

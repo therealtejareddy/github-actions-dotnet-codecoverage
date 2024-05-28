@@ -1,6 +1,6 @@
 ﻿namespace ProjectTwo
 {
-    public class ProjectTwo
+    public class Hello
     {
         public static string SayHello()
         {
