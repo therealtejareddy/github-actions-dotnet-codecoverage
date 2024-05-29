@@ -26,7 +26,7 @@ namespace GACodeCoveragePoc.Tests.GACodeCoveragePoc
             int expected = 15;
 
             // Act
-            int output = Calculator.Add(a, b,a);
+            int output = Calculator.Add(a, b, a);
 
             // Assert
             Assert.Equal(expected, output);
@@ -38,7 +38,7 @@ namespace GACodeCoveragePoc.Tests.GACodeCoveragePoc
             // Arrange
             int a = 5;
             int b = 5;
-            int expected = 10;
+            int expected = 20;
 
             // Act
             int output = Calculator.Add(a, b, a, b);
