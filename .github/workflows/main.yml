@@ -1,11 +1,22 @@
 name: Code coverage
 
-on: [push, pull_request]
+on:
+  pull_request:
+
+  # workflow_run:
+  #   workflows: ["ci"]
+  #   types:
+  #     - success
+
 
 env:
   DOTNET_VERSION: '8.0.100'
 
 jobs:
+  build:
+    uses: ./.github/workflows/ci.yaml
+    secrets: inherit
+
   code-coverage:
     runs-on: ubuntu-latest
     steps:
@@ -61,9 +72,9 @@ jobs:
           output: both
           thresholds: '60 80'
 
-      - name: Add coverage report to PR comment
+      - name: Add coverage report to PR comments
         if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2.2.0
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
           recreate: true
           path: code-coverage-results.md
