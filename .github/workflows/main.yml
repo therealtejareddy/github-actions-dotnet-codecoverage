@@ -3,21 +3,20 @@ name: Code coverage
 on:
   pull_request:
 
-  workflow_run:
-    workflows: ["ci"]
-    types:
-      - success
+  # workflow_run:
+  #   workflows: ["ci"]
+  #   types:
+  #     - success
 
 
 env:
   DOTNET_VERSION: '8.0.100'
 
 jobs:
-  dummy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: dummy
-        run: echo "Runs dummy"
+  build:
+    uses: ./.github/workflows/ci.yaml
+    secrets: inherit
+
   code-coverage:
     runs-on: ubuntu-latest
     steps:
