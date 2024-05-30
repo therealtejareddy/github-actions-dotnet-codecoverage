@@ -6,6 +6,11 @@ env:
   DOTNET_VERSION: '8.0.100'
 
 jobs:
+  dummy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: dummy
+        run: echo "Runs dummy"
   code-coverage:
     needs: ci-job
     runs-on: ubuntu-latest
