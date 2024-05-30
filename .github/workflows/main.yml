@@ -19,7 +19,6 @@ jobs:
       - name: dummy
         run: echo "Runs dummy"
   code-coverage:
-    needs: ci-job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
