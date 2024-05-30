@@ -2,7 +2,7 @@ name: ci
 
 on:
   # push:
-  wrokflow_call:
+  workflow_call:
 
 jobs:
   ci-job:
