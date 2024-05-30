@@ -1,6 +1,13 @@
 name: Code coverage
 
-on: [push, pull_request]
+on:
+  pull_request:
+
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
+
 
 env:
   DOTNET_VERSION: '8.0.100'
